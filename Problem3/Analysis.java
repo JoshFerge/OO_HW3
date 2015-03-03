@@ -40,6 +40,19 @@ class LogHTML implements Logging
 	}
 }
 
+class TypeFactory{
+	
+	static  Logging createLog(String type){
+	if(type.equalsIgnoreCase("text"))
+		return new LogText();
+	else if (type.equalsIgnoreCase("xml"))
+		return new LogXML();
+	else
+		return new LogHTML();
+	}
+	
+}
+
 class Analysis
 {
 	public static void main(String[] args)
@@ -50,15 +63,16 @@ class Analysis
 			System.exit(-1);
 		}
 		String type = args[0];
+		
 		Logging logfile;
 		if (type.equalsIgnoreCase("text"))
-			logfile = new LogText();
+			logfile = TypeFactory.createLog("text");
 		else if (type.equalsIgnoreCase("xml"))
-			logfile = new LogXML();
+			logfile = TypeFactory.createLog("xml");
 		else if (type.equalsIgnoreCase("html"))
-			logfile = new LogHTML();
+			logfile = TypeFactory.createLog("html");
 		else
-			logfile = new LogText();
+			logfile = TypeFactory.createLog("text");
 		logfile.log("Starting application...");
 
 		System.out.println("... read in data file to analyze ...");
