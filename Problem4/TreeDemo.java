@@ -30,16 +30,19 @@ class Tree implements Terrain
 	public void draw(Graphics graphics, int x, int y)
 	{
 		graphics.drawImage(image, x, y, null);
-	}
+	} 
 }
 class TreeFactory
 {
-	private static final ArrayList<Tree> mylist = new ArrayList<Tree>();
+	private static final HashMap<String, Tree> myhash = new HashMap<String, Tree>();
 	public static Terrain getTree(String type)
 	{
-		Tree tree = new Tree(type);
-		mylist.add(tree);
-		return tree;
+		Tree concreteTree = myhash.get(type);
+		if (concreteTree == null) {
+			concreteTree = new Tree(type);
+			myhash.put(type,concreteTree);
+		}
+		return concreteTree;
    }
 }
 /**
