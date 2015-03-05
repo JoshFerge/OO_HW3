@@ -43,12 +43,13 @@ class LogHTML implements Logging
 class TypeFactory{
 	
 	static  Logging createLog(String type){
-	if(type.equalsIgnoreCase("text"))
-		return new LogText();
-	else if (type.equalsIgnoreCase("xml"))
+
+	if (type.equalsIgnoreCase("xml"))
 		return new LogXML();
-	else
+	else if (type.equalsIgnoreCase("html"))
 		return new LogHTML();
+	else
+		return new LogText();
 	}
 	
 }
@@ -65,12 +66,9 @@ class Analysis
 		String type = args[0];
 		
 		Logging logfile;
-	
-		logfile = TypeFactory.createLog("text");
-		logfile = TypeFactory.createLog("xml");
-		logfile = TypeFactory.createLog("html");
-		logfile = TypeFactory.createLog("text");
-		
+
+		logfile = TypeFactory.createLog(type);
+
 		logfile.log("Starting application...");
 
 		System.out.println("... read in data file to analyze ...");
