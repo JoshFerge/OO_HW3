@@ -65,14 +65,12 @@ class Analysis
 		String type = args[0];
 		
 		Logging logfile;
-		if (type.equalsIgnoreCase("text"))
-			logfile = TypeFactory.createLog("text");
-		else if (type.equalsIgnoreCase("xml"))
-			logfile = TypeFactory.createLog("xml");
-		else if (type.equalsIgnoreCase("html"))
-			logfile = TypeFactory.createLog("html");
-		else
-			logfile = TypeFactory.createLog("text");
+	
+		logfile = TypeFactory.createLog("text");
+		logfile = TypeFactory.createLog("xml");
+		logfile = TypeFactory.createLog("html");
+		logfile = TypeFactory.createLog("text");
+		
 		logfile.log("Starting application...");
 
 		System.out.println("... read in data file to analyze ...");
