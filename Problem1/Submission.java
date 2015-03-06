@@ -10,7 +10,7 @@ import java.util.Random;
 public class Submission
 {
   private static Random rand = new Random();
-  public int id;
+  private int id;
 
   public Submission()
   {
@@ -18,13 +18,15 @@ public class Submission
     id = rand.nextInt(10000000);
   }
 
-
+  public int getId() {
+  	return id;
+  }
 }
-
 
 class GenQueueSingleton {
    private static GenQueueSingleton single;
    private LinkedList<Submission> list;
+   
    private GenQueueSingleton() {
 		list = new LinkedList<Submission>();
 	}
@@ -44,17 +46,12 @@ class GenQueueSingleton {
       return !list.isEmpty();
    }
 
-
-
-   public static GenQueueSingleton getInstance() {
+   public static synchronized GenQueueSingleton getInstance() {
 		if (single == null) {
 			single = new GenQueueSingleton();
 		}
 		return single;
 	}
-
-
-
 }
 
 class Test {
@@ -65,29 +62,33 @@ class Test {
 		Submission g4 = new Submission();
 		Submission g5 = new Submission();
 
-		
-		// GenQueueSingleton queue = GenQueueSingleton.getInstance();
-		
+		System.out.println("running getInstance");
 		GenQueueSingleton queue = GenQueueSingleton.getInstance();
+		System.out.println("running getInstance");
 		queue = GenQueueSingleton.getInstance();
-
+		System.out.println("adding submission: "+g1.getId());
 		queue.add(g1);
+		System.out.println("adding submission: "+g2.getId());
 		queue.add(g2);
+		System.out.println("running getInstance");
 		queue = GenQueueSingleton.getInstance();
+		System.out.println("adding submission: "+g3.getId());
 		queue.add(g3);
+		System.out.println("adding submission: "+g4.getId());
 		queue.add(g4);
+		System.out.println("adding submission: "+g5.getId());
 		queue.add(g5);
-		System.out.println(queue.size());
-		System.out.println(queue.process().id);
-		System.out.println(queue.size());
-		System.out.println(queue.process().id);
-		System.out.println(queue.size());
+		System.out.println("length of queue: "+queue.size());
+		System.out.println("popping "+queue.process().getId());
+		System.out.println("length of queue: "+queue.size());
+		System.out.println("popping "+queue.process().getId());
+		System.out.println("length of queue: "+queue.size());
+		System.out.println("running getInstance");
 		queue = GenQueueSingleton.getInstance();
-		System.out.println(queue.process().id);
-		System.out.println(queue.size());
-		System.out.println(queue.process().id);
-		System.out.println(queue.size());
-
+		System.out.println("popping "+queue.process().getId());
+		System.out.println("length of queue: "+queue.size());
+		System.out.println("popping "+queue.process().getId());
+		System.out.println("length of queue: "+queue.size());
 
 	}
 }

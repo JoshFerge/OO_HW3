@@ -40,16 +40,15 @@ class LogHTML implements Logging
 	}
 }
 
-class TypeFactory{
+class TypeFactory {
 	
-	static  Logging createLog(String type){
-
-	if (type.equalsIgnoreCase("xml"))
-		return new LogXML();
-	else if (type.equalsIgnoreCase("html"))
-		return new LogHTML();
-	else
-		return new LogText();
+	public static Logging createLog(String type) {
+		if (type.equalsIgnoreCase("xml"))
+			return new LogXML();
+		else if (type.equalsIgnoreCase("html"))
+			return new LogHTML();
+		else
+			return new LogText();
 	}
 	
 }
